@@ -1,11 +1,15 @@
 <div class="wrapper">
     <div class="sidebar" data-color="danger">
-        <app-navbar></app-navbar>
+        <app-navbar (click)="toggleSidebar()"></app-navbar>
         <div class="sidebar-background"></div>
     </div>
     <div class="main-panel">
-        <app-sidebar></app-sidebar>
-        <router-outlet></router-outlet>
-        <app-footer></app-footer>
+        <div class="left-sidebar"><app-sidebar [sideClass]="sidetoggle"></app-sidebar></div>
+        <div class="main-content-block">
+            <div class="container-fluid">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+        <!-- <app-footer></app-footer> -->
     </div>
 </div>

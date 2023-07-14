@@ -1,0 +1,31 @@
+
+.chatRead-block {
+    background-color: #e5eeff;
+    width: fit-content;
+    
+}
+.card {
+    position: relative;
+}
+.messages-content {
+    margin-left: 0px;
+    overflow-y: scroll;
+    height: calc(100vh - 160px);
+}
+.chatSearch-footerBlock {
+    background-color: #fff;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.03);
+    padding: 10px;
+    .header-search-field {
+        width: 90%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
+    }
+}

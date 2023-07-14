@@ -1,0 +1,14 @@
+.cover-block {
+    .card {
+        .card-img-top {
+            object-fit: cover;
+            height: 100px;
+        }
+    }
+}
+
+.popular-profile-page {
+    img {
+        margin-top: -40px;
+    }
+}

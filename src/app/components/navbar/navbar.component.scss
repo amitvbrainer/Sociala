@@ -1,0 +1,26 @@
+.navbar-brand {
+    font-size: 32px;
+}
+.navbar-toggler {
+    background-color: transparent;
+    .navbar-toggler-icon {
+        filter: brightness(0);
+    }
+}
+
+
+
+
+
+
+@media screen and (max-width:991px){
+    .navbar-brand {
+        font-size: 22px;
+    }
+    
+}
+
+@media screen and (max-width:767px){
+   
+}
+

@@ -1,0 +1,47 @@
+.community-search-block {
+    position: relative;
+    width: 65%;
+    margin: 0 auto;
+    .form-control {
+        width: 100%;
+        padding: 20px 20px 20px 50px;
+
+    }
+    i {
+        position: absolute;
+        left: 20px;
+        top: 25px;
+    }
+    button {
+        height: 50px;
+        line-height: normal;
+        position: absolute;
+        right: 6px;
+        top: 6px;
+    }
+}
+.accordion-button {
+    &::after {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width:767px){
+    .community-search-block {
+        background-color: #fff;
+        border-radius: 8px;
+        width: 100%;
+        padding: 10px;
+        .form-control {
+            width: 100%;
+            padding: 10px 20px 20px 50px;
+            background: #fff;
+        }
+        button {
+            position: unset;
+            width: 100%;
+        }
+    }
+    
+}

@@ -1,0 +1,63 @@
+.cover-block {
+    .card {
+        .card-img-top {
+            object-fit: cover;
+            height: 250px;
+        }
+        ul.nav-tabs {
+            li.nav-item {
+                .nav-link {
+                    border: 0;
+                    color: #aaa;
+                    font-weight: 600;
+                }
+                .active {
+                    color: #000;
+                }
+            }
+        }
+    }
+
+}
+
+.popular-profile-page {
+    img {
+        margin-top: -40px;
+    }
+}
+
+
+
+
+
+@media screen and (max-width:1600px){
+
+    
+    
+}
+
+
+@media screen and (max-width:991px){
+ 
+    
+    
+    
+}
+@media screen and (max-width:767px){
+    .cover-block {
+        .card {
+            ul.nav-tabs {
+                li.nav-item {
+                    .nav-link {
+                        padding-left:0;
+                        padding-right: 5;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+

@@ -1,13 +1,230 @@
-<div class="logo">
-    <img src="assets/img/logo.png" />
+<div class="navigation"  [ngClass]="{ 'sideToggle': sideClass }" id="navbarSupportedContent">
+    <div class="leftBar-block">
+        <div class="card card-newFeed">
+            <h6 class="text-black-50 fw-bold fs-12">New Feeds </h6>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li routerLinkActive="active" *ngFor="let menuItem of menuItemsFeed" class="{{menuItem.class}} nav-item">
+                        <a class="nav-link" [routerLink]="[menuItem.path]">
+                            <i class="{{menuItem.icon}}"></i>
+                            <p class="text-black-50">{{menuItem.title}}</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card">
+            <h6 class="text-black-50 fw-bold fs-12">More Pages </h6>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li routerLinkActive="active" *ngFor="let menuItem of menuItemsMorePage" class="{{menuItem.class}} nav-item mb-3">
+                        <a class="nav-link" [routerLink]="[menuItem.path]">
+                            <i class="{{menuItem.icon}} w35"></i>
+                            <p class="text-black-50">{{menuItem.title}}</p>
+                        </a>
+                        <!-- <div class="flex-shrink-0 moreIcon">
+                            <span class="badge bg-warning fs-12 fw-500">584</span>
+                          </div> -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card">
+            <h6 class="text-black-50 fw-bold fs-12">Account </h6>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li routerLinkActive="active" *ngFor="let menuItem of menuItemsAccount" class="{{menuItem.class}} nav-item mb-3">
+                        <a class="nav-link" [routerLink]="[menuItem.path]">
+                            <i class="{{menuItem.icon}} w35"></i>
+                            <p class="text-black-50">{{menuItem.title}}</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="sidebar-wrapper">
-    <ul class="nav">
-        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
-            <a class="nav-link" [routerLink]="[menuItem.path]">
-                <i class="material-icons">{{menuItem.icon}}</i>
-                <p>{{menuItem.title}}</p>
-            </a>
-        </li>
-    </ul>
-</div>
+
+
+    <div class="rightBar-block">
+        <div class="card">
+            <div class="sidebar-wrapper mb-3">
+                <div class="d-flex mb-2">
+                    <h6 class="text-black-50 fw-bold fs-12">CONTACTS</h6>
+                </div>
+                <div class="title d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="flex-shrink-0">
+                            <img  class="bg-greylight w35" src="../../../assets/user.png" />
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="fs-12 fw-bold mb-0 text-black-50">Hurin Seary </h6>
+                        </div>
+                      </div>
+                    <div class="flex-shrink-0 moreIcon">
+                        <i class="fa fa-circle text-success fs-12" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="title d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="flex-shrink-0">
+                            <img  class="bg-greylight w35" src="../../../assets/user.png" />
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="fs-12 fw-bold mb-0 text-black-50">Victor Exrixon </h6>
+                        </div>
+                      </div>
+                    <div class="flex-shrink-0 moreIcon">
+                        <i class="fa fa-circle text-success fs-12" aria-hidden="true"></i>
+                    </div>
+                </div><div class="title d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="flex-shrink-0">
+                            <img  class="bg-greylight w35" src="../../../assets/user.png" />
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="fs-12 fw-bold mb-0 text-black-50">Surfiya Zakir </h6>
+                        </div>
+                      </div>
+                    <div class="flex-shrink-0 moreIcon">
+                        <i class="fa fa-circle text-success fs-12" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="title d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="flex-shrink-0">
+                            <img  class="bg-greylight w35" src="../../../assets/user.png" />
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="fs-12 fw-bold mb-0 text-black-50">Goria Coast </h6>
+                        </div>
+                      </div>
+                    <div class="flex-shrink-0 moreIcon">
+                        <i class="fa fa-circle text-success fs-12" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="title d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="flex-shrink-0">
+                            <img  class="bg-greylight w35" src="../../../assets/user.png" />
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="fs-12 fw-bold mb-0 text-black-50">David Goria </h6>
+                        </div>
+                      </div>
+                    <div class="flex-shrink-0 moreIcon">
+                        <i class="fa fa-circle text-success fs-12" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="title d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="flex-shrink-0">
+                            <img  class="bg-greylight w35" src="../../../assets/user.png" />
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="fs-12 fw-bold mb-0 text-black-50">Hurin Seary </h6>
+                        </div>
+                      </div>
+                    <div class="flex-shrink-0 moreIcon">
+                        <i class="fa fa-circle text-success fs-12" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="title d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="flex-shrink-0">
+                            <img  class="bg-greylight w35" src="../../../assets/user.png" />
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="fs-12 fw-bold mb-0 text-black-50">Hurin Seary </h6>
+                        </div>
+                      </div>
+                    <div class="flex-shrink-0 moreIcon">
+                        <i class="fa fa-circle text-success fs-12" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-wrapper mb-3">
+                <div class="d-flex mb-2">
+                    <h6 class="text-black-50 fw-bold fs-12">GROUPS</h6>
+                </div>
+                <div class="title d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="flex-shrink-0">
+                            <span class="btn-round-sm bg-primary-gradiant text-white fs-12 fw-bold">AB</span>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="fs-12 fw-bold mb-0 text-black-50">Studio Express </h6>
+                        </div>
+                      </div>
+                    <div class="flex-shrink-0 moreIcon fs-12 fw-500 text-black-50">
+                        <span>2 min</span>
+                    </div>
+                </div>
+                <div class="title d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="flex-shrink-0">
+                            <span class="btn-round-sm bg-gold-gradiant text-white fs-12 fw-bold">SD</span>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="fs-12 fw-bold mb-0 text-black-50">Armany Design </h6>
+                        </div>
+                      </div>
+                    <div class="flex-shrink-0 moreIcon fs-12 fw-500 text-black-50">
+                        <span>2 min</span>
+                    </div>
+                </div>
+                <div class="title d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="flex-shrink-0">
+                            <span class="btn-round-sm bg-mini-gradiant text-white fs-12 fw-bold">UD</span>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="fs-12 fw-bold mb-0 text-black-50">De fabous </h6>
+                        </div>
+                      </div>
+                    <div class="flex-shrink-0 moreIcon fs-12 fw-500 text-black-50">
+                        <span>2 min</span>
+                    </div>
+                </div>
+                
+
+
+            </div>
+
+            <div class="sidebar-wrapper">
+                <div class="d-flex mb-2">
+                    <h6 class="text-black-50 fw-bold fs-12">PAGES</h6>
+                </div>
+                <div class="title d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="flex-shrink-0">
+                            <span class="btn-round-sm bg-primary-gradiant text-white fs-12 fw-bold">AB</span>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="fs-12 fw-bold mb-0 text-black-50">Armany Seary </h6>
+                        </div>
+                      </div>
+                    <div class="flex-shrink-0 moreIcon fs-12 fw-500 text-black-50">
+                        <span>2 min</span>
+                    </div>
+                </div>
+                <div class="title d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="flex-shrink-0">
+                            <span class="btn-round-sm bg-gold-gradiant text-white fs-12 fw-bold">SD</span>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="fs-12 fw-bold mb-0 text-black-50">Entropio Inc </h6>
+                        </div>
+                      </div>
+                    <div class="flex-shrink-0 moreIcon fs-12 fw-500 text-black-50">
+                        <span>2 min</span>
+                    </div>
+                </div>
+                
+
+
+            </div>
+        </div>
+    </div>
