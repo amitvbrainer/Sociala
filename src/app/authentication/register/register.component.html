@@ -12,23 +12,23 @@
             </div>
         </div>
         <div class="container-fluid">
-            <form class="row" [formGroup]="registerForm">
+            <form [formGroup]="registerForm">
                 <div class="row">
-                    <div class="col-xl-5 d-none d-xl-block p-0 vh-100">
+                    <div class="col-xl-5 d-none d-xl-block p-0 min-vh-100">
                         <div class="leftScreen">
                         </div>
                     </div>
-                    <div class="col-xl-7 vh-100 align-items-center d-flex rounded-3 ">
-                        <div class="rightScreen login-card">
-                            <h2 class="fs-2 fw-bold">Create <br>your account </h2>
-                            <div class="col-md-12 mb-3">
-                                <label class="toggle-switch">
-                                    <input type="checkbox">
-                                    <span class="slider round" (click)="toggleDiv()"></span>
-                                </label>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <div class="form-block">
+                    <div class="col-xl-7">
+                        <div class="registerFormCreate rounded-3 gap-3 min-vh-100 p-3">
+                            <div class="login-card">
+                                <h2 class="mb-4">Create your account </h2>
+                                <div class="form-group">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox">
+                                        <span class="slider round" (click)="toggleDiv()"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
                                     <i class="fa fa-user text-black-50" aria-hidden="true"></i>
                                     <input type="text" class="form-control" id="name" formControlName="name"
                                         placeholder="Your Name">
@@ -40,9 +40,7 @@
                                         </p>
                                     </ng-container>
                                 </div>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <div class="form-block">
+                                <div class="form-group">
                                     <i class="fa fa-envelope text-black-50" aria-hidden="true"></i>
                                     <input type="mail" class="form-control" formControlName="email" pattern=".+@.+\..+"
                                         id="email" placeholder="Your Email Address">
@@ -58,9 +56,7 @@
                                         </p>
                                     </ng-container>
                                 </div>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <div class="form-block">
+                                <div class="form-group">
                                     <i class="fa fa-lock text-black-50" aria-hidden="true"></i>
                                     <input type="password" class="form-control" formControlName="password" id="password"
                                         placeholder="Password">
@@ -72,9 +68,7 @@
                                         </p>
                                     </ng-container>
                                 </div>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <div class="form-block">
+                                <div class="form-group">
                                     <i class="fa fa-lock text-black-50" aria-hidden="true"></i>
                                     <input type="password" class="form-control" id="cpassword"
                                         placeholder="Confirm Password" formControlName="confirmPassword">
@@ -83,190 +77,204 @@
                                         <p class="caption status-danger">Passwords do not match.</p>
                                     </div>
                                 </div>
+                                <div class="form-group form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label fs-14 text-black-50" for="flexCheckDefault">
+                                        Accept Term and Conditions</label>
+                                </div>
+                                <button type="submit" [disabled]="registerForm.invalid"
+                                    class="btn register-btn mb-3">Register</button>
+                                <div class="fs-14 fw-600 text-black-50">Already have account <a href="#"
+                                        class="text-decoration-none">Login</a></div>
                             </div>
-                            <div class="col-md-12 mb-3">
-                                <div class="d-flex justify-content-between">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label fs-14 text-black-50" for="flexCheckDefault">
-                                            Accept Term and Conditions</label>
+                            <div class="registerForm" *ngIf="showDiv">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>User Email</label>
+                                            <input type="text" placeholder="User Email" formControlName="userEmail"
+                                                pattern=".+@.+\..+" class="form-control">
+                                            <ng-container
+                                                *ngIf="registerForm.get('userEmail')?.invalid && registerForm.get('userEmail')?.touched">
+                                                <p class="caption status-danger"
+                                                    *ngIf="registerForm.get('userEmail')?.errors?.['required']">
+                                                    Email is required
+                                                </p>
+                                                <p class="caption status-danger"
+                                                    *ngIf="registerForm.get('userEmail')?.errors?.['pattern']">
+                                                    Please enter valid email
+                                                </p>
+                                            </ng-container>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div *ngIf="showDiv">
-                            <div class="row">
-                                <div class="col-md-12 mb-3">
-                                    <div class="form-block">
-                                        <label>Country</label>
-                                        <select class="form-control" formControlName="country"
-                                            (ngModelChange)="onCountryChange($event)">
-                                            <option *ngFor="let county of countryData" [value]="county['iso2']">{{
-                                                county['name'] }}
-                                            </option>
-                                        </select>
-                                        <ng-container
-                                            *ngIf="registerForm.get('country')?.invalid && registerForm.get('country')?.touched">
-                                            <p class="caption status-danger"
-                                                *ngIf="registerForm.get('country')?.errors?.['required']">
-                                                Country is required
-                                            </p>
-                                        </ng-container>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label> User Name</label>
+                                            <input type="text" placeholder="User Name" formControlName="userName"
+                                                class="form-control">
+                                            <ng-container
+                                                *ngIf="registerForm.get('userName')?.invalid && registerForm.get('userName')?.touched">
+                                                <p class="caption status-danger"
+                                                    *ngIf="registerForm.get('userName')?.errors?.['required']">
+                                                    Name is required
+                                                </p>
+                                            </ng-container>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <div class="form-block">
-                                        <label>State</label>
-                                        <select class="form-control" id="state" formControlName="state"
-                                            (ngModelChange)="onStateChange($event)">
-                                            <option *ngFor="let state of stateData" [value]="state['iso2']">
-                                                {{ state['name'] }}
-                                            </option>
-                                        </select>
-                                        <ng-container
-                                            *ngIf="registerForm.get('state')?.invalid && registerForm.get('state')?.touched">
-                                            <p class="caption status-danger"
-                                                *ngIf="registerForm.get('state')?.errors?.['required']">
-                                                State is required
-                                            </p>
-                                        </ng-container>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Country</label>
+                                            <div class="customSelect">
+                                                <select class="form-control" formControlName="country"
+                                                    (ngModelChange)="onCountryChange($event)">
+                                                    <option *ngFor="let county of countryData" [value]="county['iso2']">
+                                                        {{
+                                                        county['name'] }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <ng-container
+                                                *ngIf="registerForm.get('country')?.invalid && registerForm.get('country')?.touched">
+                                                <p class="caption status-danger"
+                                                    *ngIf="registerForm.get('country')?.errors?.['required']">
+                                                    Country is required
+                                                </p>
+                                            </ng-container>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 mb-3">
-                                    <div class="form-block">
-                                        <label>City</label>
-                                        <select class="form-control" formControlName="city">
-                                            <option *ngFor="let city of cityData" [value]="city['iso2']">{{ city['name']
-                                                }}</option>
-                                        </select>
-                                        <ng-container
-                                            *ngIf="registerForm.get('city')?.invalid && registerForm.get('city')?.touched">
-                                            <p class="caption status-danger"
-                                                *ngIf="registerForm.get('city')?.errors?.['required']">
-                                                City is required
-                                            </p>
-                                        </ng-container>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>State</label>
+                                            <div class="customSelect">
+                                                <select class="form-control" id="state" formControlName="state"
+                                                    (ngModelChange)="onStateChange($event)">
+                                                    <option *ngFor="let state of stateData" [value]="state['iso2']">
+                                                        {{ state['name'] }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <ng-container
+                                                *ngIf="registerForm.get('state')?.invalid && registerForm.get('state')?.touched">
+                                                <p class="caption status-danger"
+                                                    *ngIf="registerForm.get('state')?.errors?.['required']">
+                                                    State is required
+                                                </p>
+                                            </ng-container>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <div class="form-block">
-                                        <label>Code</label>
-                                        <input type="text" class="form-control" placeholder="Code"
-                                            formControlName="code">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <div class="customSelect">
+                                                <select class="form-control" formControlName="city">
+                                                    <option *ngFor="let city of cityData" [value]="city['iso2']">{{
+                                                        city['name']
+                                                        }}</option>
+                                                </select>
+                                            </div>
+                                            <ng-container
+                                                *ngIf="registerForm.get('city')?.invalid && registerForm.get('city')?.touched">
+                                                <p class="caption status-danger"
+                                                    *ngIf="registerForm.get('city')?.errors?.['required']">
+                                                    City is required
+                                                </p>
+                                            </ng-container>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 mb-3">
-                                    <div class="form-block">
-                                        <label>User Email</label>
-                                        <input type="text" placeholder="User Email" formControlName="userEmail"
-                                            pattern=".+@.+\..+" class="form-control">
-                                        <ng-container
-                                            *ngIf="registerForm.get('userEmail')?.invalid && registerForm.get('userEmail')?.touched">
-                                            <p class="caption status-danger"
-                                                *ngIf="registerForm.get('userEmail')?.errors?.['required']">
-                                                Email is required
-                                            </p>
-                                            <p class="caption status-danger"
-                                                *ngIf="registerForm.get('userEmail')?.errors?.['pattern']">
-                                                Please enter valid email
-                                            </p>
-                                        </ng-container>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Code</label>
+                                            <input type="text" class="form-control" placeholder="Code"
+                                                formControlName="code">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <div class="form-block">
-                                        <label> User Name</label>
-                                        <input type="text" placeholder="User Name" formControlName="userName"
-                                            class="form-control">
-                                        <ng-container
-                                            *ngIf="registerForm.get('userName')?.invalid && registerForm.get('userName')?.touched">
-                                            <p class="caption status-danger"
-                                                *ngIf="registerForm.get('userName')?.errors?.['required']">
-                                                Name is required
-                                            </p>
-                                        </ng-container>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Credit Card Number</label>
+                                            <input type="text" (input)="onCardNumberInput($event)" class="form-control"
+                                                placeholder="Card Number" formControlName="cardNumber">
+                                            <ng-container
+                                                *ngIf="registerForm.get('cardNumber')?.invalid && registerForm.get('cardNumber')?.touched">
+                                                <p class="caption status-danger"
+                                                    *ngIf="registerForm.get('cardNumber')?.errors?.['required']">
+                                                    Card Number is required
+                                                </p>
+                                                <div
+                                                    *ngIf="registerForm.get('cardNumber')?.invalid && registerForm.get('cardNumber')?.touched">
+                                                    <p class="caption status-danger">Please enter a valid 16-digit card
+                                                        number.
+                                                    </p>
+                                                </div>
+                                            </ng-container>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <label>Credit Card Number</label>
-                                <input type="text" (input)="onCardNumberInput($event)" class="form-control"
-                                    placeholder="Card Number" formControlName="cardNumber">
-                                <ng-container
-                                    *ngIf="registerForm.get('cardNumber')?.invalid && registerForm.get('cardNumber')?.touched">
-                                    <p class="caption status-danger"
-                                        *ngIf="registerForm.get('cardNumber')?.errors?.['required']">
-                                        Card Number is required
-                                    </p>
-                                    <div
-                                        *ngIf="registerForm.get('cardNumber')?.invalid && registerForm.get('cardNumber')?.touched">
-                                        <p class="caption status-danger">Please enter a valid 16-digit card number.</p>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>CVV Number</label>
+                                            <input type="text" placeholder="CVV number" formControlName="cvvNumber"
+                                                class="form-control" (input)="onCvvNumberInput($event)">
+                                            <ng-container
+                                                *ngIf="registerForm.get('cvvNumber')?.invalid && registerForm.get('cvvNumber')?.touched">
+                                                <p class="caption status-danger"
+                                                    *ngIf="registerForm.get('cvvNumber')?.errors?.['required']">
+                                                    CVV is required
+                                                </p>
+                                                <div
+                                                    *ngIf="registerForm.get('cvvNumber')?.invalid && registerForm.get('cvvNumber')?.touched">
+                                                    <p class="caption status-danger"> Please enter valid 3 digit number.
+                                                    </p>
+                                                </div>
+                                            </ng-container>
+                                        </div>
                                     </div>
-                                </ng-container>
-                            </div>
-                            <div class="row">
-                                <div class="form-group">
-                                    <label for="expirationMonth">Expiration Date</label>
-                                    <div class="d-flex">
-                                        <select class="form-control mr-2" formControlName="expirationMonth">
-                                            <option value="">Month</option>
-                                            <option *ngFor="let month of months" [value]="month">{{ month }}</option>
-                                        </select>
-                                        <ng-container
-                                            *ngIf="registerForm.get('expirationMonth')?.invalid && registerForm.get('expirationMonth')?.touched">
-                                            <p class="caption status-danger"
-                                                *ngIf="registerForm.get('expirationMonth')?.errors?.['required']">
-                                                Month is required
-                                            </p>
-                                        </ng-container>
-                                        <select class="form-control" formControlName="expirationYear">
-                                            <option value="">Year</option>
-                                            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
-                                        </select>
-                                        <ng-container
-                                            *ngIf="registerForm.get('expirationYear')?.invalid && registerForm.get('expirationYear')?.touched">
-                                            <p class="caption status-danger"
-                                                *ngIf="registerForm.get('expirationYear')?.errors?.['required']">
-                                                Year is required
-                                            </p>
-                                        </ng-container>
-                                        <div *ngIf="registerForm.hasError('invalidExpirationDate')">
-                                            <p class="caption status-danger">
-                                                Expiration date is invalid or before
-                                            </p>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="expirationMonth">Expiration Date</label>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="customSelect">
+                                                        <select class="form-control" formControlName="expirationMonth">
+                                                            <option value="">Month</option>
+                                                            <option *ngFor="let month of months" [value]="month">{{
+                                                                month }}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    <ng-container
+                                                        *ngIf="registerForm.get('expirationMonth')?.invalid && registerForm.get('expirationMonth')?.touched">
+                                                        <p class="caption status-danger"
+                                                            *ngIf="registerForm.get('expirationMonth')?.errors?.['required']">
+                                                            Month is required
+                                                        </p>
+                                                    </ng-container>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="customSelect">
+                                                        <select class="form-control" formControlName="expirationYear">
+                                                            <option value="">Year</option>
+                                                            <option *ngFor="let year of years" [value]="year">{{ year }}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    <ng-container
+                                                        *ngIf="registerForm.get('expirationYear')?.invalid && registerForm.get('expirationYear')?.touched">
+                                                        <p class="caption status-danger"
+                                                            *ngIf="registerForm.get('expirationYear')?.errors?.['required']">
+                                                            Year is required
+                                                        </p>
+                                                    </ng-container>
+                                                    <div *ngIf="registerForm.hasError('invalidExpirationDate')">
+                                                        <p class="caption status-danger">
+                                                            Expiration date is invalid or before
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <label>CVV Number</label>
-                                <input type="text" placeholder="CVV number" formControlName="cvvNumber"
-                                    class="form-control" (input)="onCvvNumberInput($event)">
-                                <ng-container
-                                    *ngIf="registerForm.get('cvvNumber')?.invalid && registerForm.get('cvvNumber')?.touched">
-                                    <p class="caption status-danger"
-                                        *ngIf="registerForm.get('cvvNumber')?.errors?.['required']">
-                                        CVV is required
-                                    </p>
-                                    <div
-                                        *ngIf="registerForm.get('cvvNumber')?.invalid && registerForm.get('cvvNumber')?.touched">
-                                        <p class="caption status-danger"> Please enter valid 3 digit number.</p>
-                                    </div>
-                                </ng-container>
-                            </div>
                         </div>
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" [disabled]="registerForm.invalid"
-                            class="btn btn-lg bg-dark text-white fs-14 w-100 py-3 fw-600 rounded">Register</button>
-                    </div>
-                    <div class="col-12">
-                        <div class="fs-14 fw-600 mt-3 text-black-50">Already have account <a href="#"
-                                class="text-decoration-none">Login</a></div>
                     </div>
                 </div>
             </form>
