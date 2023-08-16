@@ -20,6 +20,7 @@ export class RegisterComponent implements OnInit {
   stateData: any;
   cityData: any;
   getCountryId: any;
+  tipsterUser:any;
   public statesForSelectedCountry: { [key: string]: Object }[];
   public citiesForSelectedState: { [key: string]: Object }[];
   constructor(private formBuilder: FormBuilder, private registerService: CommonService) {
@@ -77,6 +78,7 @@ export class RegisterComponent implements OnInit {
 
   toggleDiv(): void {
     if (this.showDiv === false) {
+      this.tipsterUser = "Tipster User";
       this.registerForm.get('country')?.setValidators([Validators.required]);
       this.registerForm.get('state')?.setValidators([Validators.required]);
       this.registerForm.get('city')?.setValidators([Validators.required]);
@@ -91,6 +93,7 @@ export class RegisterComponent implements OnInit {
       ]);
 
     } else {
+      this.tipsterUser = "";
       this.registerForm.get('country')?.setValidators([]);
       this.registerForm.get('state')?.setValidators([]);
       this.registerForm.get('city')?.setValidators([]);
