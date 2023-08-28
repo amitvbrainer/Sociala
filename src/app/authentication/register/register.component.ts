@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CommonService } from 'app/service/common.service';
+import { UserService } from 'app/service/user.service';
 
 @Component({
   selector: 'app-register',
@@ -20,17 +22,20 @@ export class RegisterComponent implements OnInit {
   stateData: any;
   cityData: any;
   getCountryId: any;
-  tipsterUser:any;
+  tipsterUser = "Tipster User"
   public statesForSelectedCountry: { [key: string]: Object }[];
   public citiesForSelectedState: { [key: string]: Object }[];
-  constructor(private formBuilder: FormBuilder, private registerService: CommonService) {
+  constructor(private formBuilder: FormBuilder, private registerService: CommonService,
+    private userService: UserService, private router: Router) {
     this.registerForm = this.formBuilder.group({
-      expirationMonth: [''],
+      isTipster:[false],
+      currentDate:[],
+      expirationMonth: [],
       expirationYear: [this.currentYear],
       country: [''],
       state: [''],
       city: [''],
-      code: [''],
+      postcode: [''],
       userEmail: [''],
       userName: [''],
       cardNumber: [''],
@@ -78,7 +83,7 @@ export class RegisterComponent implements OnInit {
 
   toggleDiv(): void {
     if (this.showDiv === false) {
-      this.tipsterUser = "Tipster User";
+      this.registerForm.controls['isTipster'].setValue(true);
       this.registerForm.get('country')?.setValidators([Validators.required]);
       this.registerForm.get('state')?.setValidators([Validators.required]);
       this.registerForm.get('city')?.setValidators([Validators.required]);
@@ -91,9 +96,8 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         this.expirationDateValidator
       ]);
-
     } else {
-      this.tipsterUser = "";
+      this.registerForm.controls['isTipster'].setValue(false);
       this.registerForm.get('country')?.setValidators([]);
       this.registerForm.get('state')?.setValidators([]);
       this.registerForm.get('city')?.setValidators([]);
@@ -130,7 +134,7 @@ export class RegisterComponent implements OnInit {
 
       const validRange = currentYear + 10; // 10 years ahead
       if (selectedYear > validRange) {
-        return { invalidExpirationDate: true };
+        return { invalidExpirationDate: true};
       }
     }
     return null;
@@ -161,5 +165,27 @@ export class RegisterComponent implements OnInit {
     this.registerService.getCountries().subscribe((country: any) => {
       this.countryData = country;
     })
+  }
+
+  renderNumber(value: number, length: number) {
+    let result: string = value.toString();
+    for (; length > result.length; length -= 1) result = '0' + result;
+    return result;
+  }
+
+  onSubmit() {
+    if (this.registerForm.valid) {
+      this.registerForm.controls['expirationMonth'].setValue(parseInt(this.registerForm.controls['expirationMonth'].value, 10));
+      this.registerForm.controls['expirationYear'].setValue(parseInt(this.registerForm.controls['expirationYear'].value, 10));
+      const currentDate = new Date();
+      const formattedDate = currentDate.toISOString();
+      this.registerForm.controls['currentDate'].setValue(formattedDate);
+      this.userService.registerUser(this.registerForm.value).subscribe((resp: any) => {
+        console.log("s", resp);
+        if (resp) {
+          this.router.navigate(['login']);
+        }
+      });
+    }
   }
 }

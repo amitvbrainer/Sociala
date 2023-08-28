@@ -11,23 +11,36 @@
         <div class="row">
             <div class="col-xl-5 d-none d-xl-block p-0 vh-100">
                 <div class="leftScreen">
-                    
                 </div>
             </div>
             <div class="col-xl-7 vh-100 align-items-center d-flex rounded-3 ">
                 <div class="rightScreen login-card">
                     <h2 class="fs-2 fw-bold">Login into <br> your account </h2>
-                    <form class="row">
+                    <form class="row"[formGroup]="loginForm">
                         <div class="col-md-12 mb-3">
                             <div class="form-block">
                                 <i class="fa fa-envelope text-black-50" aria-hidden="true"></i>
-                                <input type="mail" class="form-control" id="mail" placeholder="Your Email Address">
+                                <input type="mail" class="form-control" formControlName="email" pattern=".+@.+\..+"
+                                id="email"  placeholder="Your Email Address">
+                                <ng-container *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                                    <p class="caption status-danger" *ngIf="loginForm.get('email')?.errors?.['required']">
+                                        Email is required
+                                    </p>
+                                    <p class="caption status-danger" *ngIf="loginForm.get('email')?.errors?.['pattern']">
+                                        Please enter valid email
+                                    </p>
+                                </ng-container>
                             </div>
                         </div>
                         <div class="col-md-12 mb-3">
                             <div class="form-block">
                                 <i class="fa fa-lock text-black-50" aria-hidden="true"></i>
-                                <input type="password" class="form-control" id="password" placeholder="Password">
+                                <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password">
+                                <ng-container *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                                    <p class="caption status-danger" *ngIf="loginForm.get('password')?.errors?.['required']">
+                                        Password is required
+                                    </p>
+                                </ng-container>
                             </div>
                         </div>
                         <div class="col-md-12 mb-3">
@@ -42,10 +55,10 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn btn-lg bg-dark text-white fs-14 w-100 py-3 fw-600 rounded">Login</button>
+                            <button type="submit" (click)="loginUser()" [disabled]="loginForm.invalid" class="btn btn-lg bg-dark text-white fs-14 w-100 py-3 fw-600 rounded" >Login</button>
                         </div>
                         <div class="col-12">
-                            <div class="fs-14 fw-600 mt-3 text-black-50">Dont have account <a href="#" class="text-decoration-none">Register</a></div>
+                            <div class="fs-14 fw-600 mt-3 text-black-50">Dont have account <a href="#" class="text-decoration-none" routerLink="/register">Register</a></div>
                             <div class="fs-14 fw-600 mt-3 text-center text-black-50">Or, Sign in with your social account</div>
                         </div>
                         <div class="col-12">

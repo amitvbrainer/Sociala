@@ -5,6 +5,7 @@ import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { ForgotPasswordComponent } from './authentication/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
+import { authGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'login', component: LoginComponent
+    path: 'login', component: LoginComponent, canActivate:[authGuard]
   },
   {
     path: 'register', component: RegisterComponent

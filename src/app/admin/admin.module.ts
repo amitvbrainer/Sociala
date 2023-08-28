@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'app/shared/shared.module';
+import { authGuard } from 'app/auth.guard';
 
 const pagesRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', loadChildren: () => import('../pages/home/home.module').then(m => m.HomeModule) },
+  { path: 'home', loadChildren: () => import('../pages/home/home.module').then(m => m.HomeModule),canActivate:[authGuard] },
   { path: 'badge', loadChildren: () => import('../pages/badges/badges.module').then(m => m.BadgesModule) },
   { path: 'stories', loadChildren: () => import('../pages/storie/storie.module').then(m => m.StorieModule) },
   { path: 'defaultgroup', loadChildren: () => import('../pages/popular-group/popular-group.module').then(m => m.PopularGroupModule) },
