@@ -24,7 +24,6 @@ export class CommonService {
   }
 ​
   getStatesByCountry(countryIso: any) : Observable<any> {
-    console.log(countryIso);
     return this.http.get<any>(`https://api.countrystatecity.in/v1/countries/${countryIso}/states`, 
     {headers: this.httpOptions.headers})
   }

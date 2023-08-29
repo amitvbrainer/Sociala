@@ -1,0 +1,46 @@
+<div class="inner-wrapper">
+    <div class="frontscreen-block ">
+        <div class="loging-header d-flex justify-content-between px-3">
+            <a class="navbar-brand text-primary fw-bold fs-1" href="#"><i class="fa fa-bolt text-success"
+                    aria-hidden="true"></i> Sociala.</a>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-5 d-none d-xl-block p-0 vh-100">
+                    <div class="leftScreen">
+                    </div>
+                </div>
+                <div class="col-xl-7 vh-100 align-items-center d-flex rounded-3 ">
+                    <div class="rightScreen login-card">
+                        <h2 class="fs-2 fw-bold"> Recover Email </h2>
+                        <form class="row" [formGroup]="recoverEmailForm">
+                            <div class="col-md-12 mb-3">
+                                <div class="form-block">
+                                    <i class="fa fa-envelope text-black-50" aria-hidden="true"></i>
+                                    <input type="mail" class="form-control" formControlName="email" pattern=".+@.+\..+"
+                                        id="email" placeholder="Your Email Address">
+                                    <ng-container
+                                        *ngIf="recoverEmailForm.get('email')?.invalid && recoverEmailForm.get('email')?.touched">
+                                        <p class="caption status-danger"
+                                            *ngIf="recoverEmailForm.get('email')?.errors?.['required']">
+                                            Email is required
+                                        </p>
+                                        <p class="caption status-danger"
+                                            *ngIf="recoverEmailForm.get('email')?.errors?.['pattern']">
+                                            Please enter valid email
+                                        </p>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" (click)="recoverEmail()" [disabled]="recoverEmailForm.invalid"
+                                    class="btn btn-lg bg-dark text-white fs-14 w-100 py-3 fw-600 rounded">Recover
+                                    Email</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,11 +11,14 @@ export class UserService {
   constructor(public http: HttpClient) { }
 
   registerUser(user: any): Observable<any> {
-    debugger
     return this.http.post<any>(this.apiUrl + 'api/User/UserRegistration', user);
   }
 
   loginUser(user: any): Observable<any> {
     return this.http.post<any>(this.apiUrl + 'api/User/UserSignIn', user);
+  }
+
+  recoverEmail(userEmail:any) {
+    return this.http.post<any>(this.apiUrl + 'api/User/RecoverEmail?email=' + userEmail, null);
   }
 }

@@ -14,6 +14,7 @@ import { RegisterComponent } from './authentication/register/register.component'
 import { ForgotPasswordComponent } from './authentication/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RecoverEmailComponent } from './authentication/recover-email/recover-email.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    RecoverEmailComponent
   ],
   imports: [
     BrowserModule,
