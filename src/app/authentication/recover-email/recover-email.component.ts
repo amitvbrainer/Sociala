@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,9 +20,9 @@ export class RecoverEmailComponent {
   }
   recoverEmail() {
     if (this.recoverEmailForm.valid) {
-      this.userService.recoverEmail(this.recoverEmailForm.controls['email'].value).subscribe((resp: any) => {
+      this.userService.recoverEmail(this.recoverEmailForm.controls['email'].value).subscribe((resp:any) => {
         if (resp) {
-          this.notifyService.showSuccess("recover email successfully !!", "sucess");
+          this.notifyService.showSuccess("Password has been shared via email", "sucess");
           this.router.navigate(['login']);
         }
       })

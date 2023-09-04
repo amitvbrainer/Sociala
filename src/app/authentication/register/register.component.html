@@ -77,8 +77,8 @@
                                             {{ tipsterUser }}
                                         </div>
                                         <label class="toggle-switch">
-                                            <input type="checkbox">
-                                            <span class="slider round" (click)="toggleDiv()" id="isTipster" name="isTipster" formControlName="isTipster"></span>
+                                            <input type="checkbox" (click)="toggleDiv()" id="isTipster" name="isTipster" formControlName="isTipster">
+                                            <span class="slider round"></span>
                                         </label>
                                     </div>
                                 </div>
@@ -132,9 +132,8 @@
                                             <div class="customSelect">
                                                 <select class="form-control" formControlName="country"
                                                     (ngModelChange)="onCountryChange($event)">
-                                                    <option *ngFor="let county of countryData" [value]="county['iso2']">
-                                                        {{
-                                                        county['name'] }}
+                                                    <option *ngFor="let county of countryData" [ngValue]="county">
+                                                        {{county['name'] }}
                                                     </option>
                                                 </select>
                                             </div>
@@ -153,7 +152,7 @@
                                             <div class="customSelect">
                                                 <select class="form-control" id="state" formControlName="state"
                                                     (ngModelChange)="onStateChange($event)">
-                                                    <option *ngFor="let state of stateData" [value]="state['iso2']">
+                                                    <option *ngFor="let state of stateData" [ngValue]="state">
                                                         {{ state['name'] }}
                                                     </option>
                                                 </select>
@@ -171,8 +170,8 @@
                                         <div class="form-group">
                                             <label>City</label>
                                             <div class="customSelect">
-                                                <select class="form-control" formControlName="city">
-                                                    <option *ngFor="let city of cityData" [value]="city['iso2']">{{
+                                                <select class="form-control" formControlName="city"  (ngModelChange)="onCityChange($event)">
+                                                    <option *ngFor="let city of cityData"  [ngValue]="city">{{
                                                         city['name']
                                                         }}</option>
                                                 </select>

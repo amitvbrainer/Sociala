@@ -21,11 +21,12 @@ export class LoginComponent {
   loginUser() {
     if (this.loginForm.valid) {
       this.userService.loginUser(this.loginForm.value).subscribe((resp: any) => {
-        this.notifyService.showSuccess("User login successfully !!", "sucess");
-        localStorage.setItem('email', resp.email)
-        this.router.navigate(['home']);
+        if (resp) {
+          this.notifyService.showSuccess("User login is done", "sucess");
+          localStorage.setItem('email', resp.email)
+          this.router.navigate(['home']);
+        }
       })
-
-    }
+     }
   }
 }

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  apiUrl = 'https://c145-27-109-15-102.ngrok-free.app/';
+  apiUrl = 'https://1cc8-27-109-15-102.ngrok-free.app/';
   constructor(public http: HttpClient) { }
 
   registerUser(user: any): Observable<any> {

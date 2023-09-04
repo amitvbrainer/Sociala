@@ -1,7 +1,9 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonService } from 'app/service/common.service';
+import { NotificationService } from 'app/service/notification.service';
 import { UserService } from 'app/service/user.service';
 
 @Component({
@@ -22,14 +24,18 @@ export class RegisterComponent implements OnInit {
   stateData: any;
   cityData: any;
   getCountryId: any;
+  selectedCountryName: any;
+  selectedStateName: any;
+  selectedCityName: any
+
   tipsterUser = "Tipster User"
   public statesForSelectedCountry: { [key: string]: Object }[];
   public citiesForSelectedState: { [key: string]: Object }[];
   constructor(private formBuilder: FormBuilder, private registerService: CommonService,
-    private userService: UserService, private router: Router) {
+    private userService: UserService, private router: Router, private notifyService: NotificationService) {
     this.registerForm = this.formBuilder.group({
-      isTipster:[false],
-      currentDate:[],
+      isTipster: [false],
+      currentDate: [],
       expirationMonth: [],
       expirationYear: [this.currentYear],
       country: [''],
@@ -56,29 +62,26 @@ export class RegisterComponent implements OnInit {
     this.getCountrys();
   }
 
-  onCountryChange(event: any) {
-    this.getCountryId = event;
-    this.registerService.getStatesByCountry(event).subscribe((state: any) => {
+  onCountryChange(selectedCountry: any) {
+    this.selectedCountryName = selectedCountry?.name;
+    const selectedCountryIso2 = selectedCountry?.iso2;
+    this.getCountryId = selectedCountryIso2
+    this.registerService.getStatesByCountry(this.getCountryId).subscribe((state: any) => {
       this.stateData = state;
     })
   }
 
-  onStateChange(id: any) {
-    this.registerService.getCitiesByState(this.getCountryId, id).subscribe((city: any) => {
+  onStateChange(selectState: any) {
+    this.selectedStateName = selectState?.name;
+    const selectedStateIso2 = selectState?.iso2;
+
+    this.registerService.getCitiesByState(this.getCountryId, selectedStateIso2).subscribe((city: any) => {
       this.cityData = city;
     })
   }
 
-  onSelectCounty(county: any): void {
-    this.selectedCounty = county;
-  }
-
-  onSelectState(state: any): void {
-    this.selectedState = state;
-  }
-
-  onSelectCity(city: any): void {
-    this.selectedCity = city;
+  onCityChange(selectCity: any) {
+    this.selectedCityName = selectCity?.name;
   }
 
   toggleDiv(): void {
@@ -134,7 +137,7 @@ export class RegisterComponent implements OnInit {
 
       const validRange = currentYear + 10; // 10 years ahead
       if (selectedYear > validRange) {
-        return { invalidExpirationDate: true};
+        return { invalidExpirationDate: true };
       }
     }
     return null;
@@ -175,14 +178,17 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     if (this.registerForm.valid) {
+      this.registerForm.controls['country'].setValue(this.selectedCountryName);
+      this.registerForm.controls['state'].setValue(this.selectedStateName);
+      this.registerForm.controls['city'].setValue(this.selectedCityName);
       this.registerForm.controls['expirationMonth'].setValue(parseInt(this.registerForm.controls['expirationMonth'].value, 10));
       this.registerForm.controls['expirationYear'].setValue(parseInt(this.registerForm.controls['expirationYear'].value, 10));
       const currentDate = new Date();
       const formattedDate = currentDate.toISOString();
       this.registerForm.controls['currentDate'].setValue(formattedDate);
       this.userService.registerUser(this.registerForm.value).subscribe((resp: any) => {
-        console.log("s", resp);
         if (resp) {
+          this.notifyService.showSuccess("User registration is done", "sucess");
           this.router.navigate(['login']);
         }
       });
